@@ -1,13 +1,10 @@
 import Input from "./Input";
-import Radios from "./Radios";
 import Select from "./Select";
 
 export default function StepOne({
   setStep,
   basicInfo,
   setBasicInfo,
-  seating,
-  setSeating,
   ticketOptions,
   numberOfTickets,
   setNumberOfTickets,
@@ -77,7 +74,6 @@ export default function StepOne({
         value={basicInfo.zipCode}
         handleChange={handleChange}
       />
-      <Radios seating={seating} setSeating={setSeating} />
       <Select
         ticketOptions={ticketOptions}
         numberOfTickets={numberOfTickets}

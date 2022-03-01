@@ -14,7 +14,6 @@ export default function Form() {
     email: "",
     zipCode: "",
   });
-  const [seating, setSeating] = useState();
   const [numberOfTickets, setNumberOfTickets] = useState(ticketOptions[0]);
   const [guests, setGuests] = useState([]);
 
@@ -47,9 +46,9 @@ export default function Form() {
   const handleSubmit = () => {
     const submissionObject = {
       basicInfo,
-      seating,
       numberOfTickets,
       guests,
+      seating: null,
     };
 
     console.log(submissionObject);
@@ -63,8 +62,6 @@ export default function Form() {
           setStep={setStep}
           basicInfo={basicInfo}
           setBasicInfo={setBasicInfo}
-          seating={seating}
-          setSeating={setSeating}
           ticketOptions={ticketOptions}
           numberOfTickets={numberOfTickets}
           setNumberOfTickets={setNumberOfTickets}
@@ -79,7 +76,6 @@ export default function Form() {
         <StepThree
           guests={guests}
           basicInfo={basicInfo}
-          seating={seating}
           numberOfTickets={numberOfTickets}
           setStep={setStep}
           handleSubmit={handleSubmit}

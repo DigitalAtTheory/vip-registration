@@ -3,13 +3,17 @@ import GuestInputs from "./GuestInputs";
 export default function StepTwo({ numberOfTickets, handleConfirm, setStep }) {
   return (
     <div className="mb-24">
-      <h2 className="font-medium text-lg">
+      <h2 className="font-medium text-lg mb-8 md:mb-4">
         Enter the names for your tickets (including yourself)
       </h2>
       <form onSubmit={handleConfirm}>
         <div>
           {[...Array(numberOfTickets)].map((_, i) => (
-            <GuestInputs key={`guestInputs-${i}`} index={i} />
+            <GuestInputs
+              key={`guestInputs-${i}`}
+              index={i}
+              numberOfTickets={numberOfTickets}
+            />
           ))}
         </div>
         <div className="grid grid-cols-2 gap-3 mt-12">

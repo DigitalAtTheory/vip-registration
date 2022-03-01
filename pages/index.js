@@ -5,8 +5,8 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-5xl font-medium text-center my-10">
+      <div className="max-w-3xl mx-auto px-4">
+        <h1 className="text-2xl md:text-4xl font-medium text-center my-10">
           Sebring VIP Hospitality Registration
         </h1>
         <Form />

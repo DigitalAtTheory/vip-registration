@@ -1,7 +1,6 @@
 export default function StepThree({
   guests,
   basicInfo,
-  seating,
   numberOfTickets,
   setStep,
   handleSubmit,
@@ -35,12 +34,6 @@ export default function StepThree({
           <p className="font-bold uppercase text-sm text-gold-500">Zip Code:</p>
           <p className="text-lg">{basicInfo.zipCode}</p>
         </div>
-      </div>
-      <div className="mb-6">
-        <h3 className="font-bold text-xl mb-3">Seating Area:</h3>
-        <p className="font-bold text-xl bg-gold-200 text-gold-800 uppercase py-2 px-4 rounded inline-block">
-          {seating}
-        </p>
       </div>
       <div className="mb-6">
         <h3 className="font-bold text-xl mb-3">

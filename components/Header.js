@@ -5,14 +5,14 @@ import badges from "../public/Badges.png";
 export default function Header() {
   return (
     <div>
-      <div className="bg-black text-center py-4 border-b-8 border-gold-500">
+      <div className="bg-black text-center py-4 px-8 border-b-8 border-gold-500">
         <Image
           src={lockup}
           alt="Mobil 1 and Advance Auto Parts Logo"
           priority
         />
       </div>
-      <div className="w-1/3 mx-auto">
+      <div className="w-2/3 md:w-1/3 mx-auto">
         <Image src={badges} alt="Sebring VIP Badge" />
       </div>
     </div>

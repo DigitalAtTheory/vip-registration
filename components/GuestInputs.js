@@ -1,7 +1,7 @@
-export default function GuestInputs({ index }) {
+export default function GuestInputs({ index, numberOfTickets }) {
   return (
-    <div className="grid grid-cols-2 gap-3">
-      <div className="mt-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 md:gap-3">
+      <div className="md:mt-4">
         <label
           htmlFor={`guestFirstName-${index}`}
           className="block text-sm font-medium text-gray-50 uppercase"
@@ -33,6 +33,9 @@ export default function GuestInputs({ index }) {
           />
         </div>
       </div>
+      {index + 1 !== numberOfTickets && (
+        <hr className="my-12 border-gold-500 w-1/2 border-2 mx-auto md:hidden" />
+      )}
     </div>
   );
 }
