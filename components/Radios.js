@@ -9,13 +9,8 @@ function classNames(...classes) {
 
 export default function Radios({ seating, setSeating }) {
   return (
-    <div className="mt-8">
-      <div>
-        <h2 className="text-sm font-medium text-gray-50 uppercase">
-          Seating Area (Select One)
-        </h2>
-      </div>
-      <RadioGroup value={seating} onChange={setSeating} className="mt-2">
+    <div>
+      <RadioGroup value={seating} onChange={setSeating}>
         <RadioGroup.Label className="sr-only">
           Choose a seating area
         </RadioGroup.Label>
@@ -29,8 +24,8 @@ export default function Radios({ seating, setSeating }) {
                   active ? "ring-2 ring-offset-2 ring-gold-500" : "",
                   checked
                     ? "bg-gold-600 border-transparent text-white"
-                    : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50",
-                  "border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    : "bg-gray-50 shadow-md border-gray-200 text-gray-900 hover:bg-gray-50",
+                  "border rounded-md py-1.5 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
                 )
               }
             >

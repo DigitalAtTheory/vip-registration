@@ -16,7 +16,7 @@ export default function StepTwo({ numberOfTickets, handleConfirm, setStep }) {
             />
           ))}
         </div>
-        <div className="grid grid-cols-2 gap-3 mt-12">
+        <div className="grid grid-cols-2 gap-3 my-12">
           <button
             onClick={() => setStep(1)}
             type="button"

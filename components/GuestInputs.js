@@ -33,8 +33,24 @@ export default function GuestInputs({ index, numberOfTickets }) {
           />
         </div>
       </div>
+      <div className="md:col-span-2 mt-4">
+        <label
+          htmlFor={`company-${index}`}
+          className="block text-sm font-medium text-gray-50 uppercase"
+        >
+          Company
+        </label>
+        <div className="mt-1">
+          <input
+            type="text"
+            name={`company-${index}`}
+            placeholder="Enter company name"
+            className="shadow-sm focus:ring-gold-500 focus:border-gold-500 block w-full sm:text-sm border-gray-300 rounded-md text-gray-700"
+          />
+        </div>
+      </div>
       {index + 1 !== numberOfTickets && (
-        <hr className="my-12 border-gold-500 w-1/2 border-2 mx-auto md:hidden" />
+        <hr className="my-12 border-gold-500 w-1/2 border-2 mx-auto md:col-span-2" />
       )}
     </div>
   );
