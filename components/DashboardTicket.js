@@ -78,7 +78,9 @@ export default function DashboardTicket({ ticket }) {
                     Not Checked In
                   </p>
                 ) : (
-                  <p>Checked In</p>
+                  <p className="text-xs bg-green-200 font-bold text-center py-1 text-green-600 uppercase px-2 rounded-full">
+                    Checked In: {guest.checkedInTime}
+                  </p>
                 )}
               </div>
             </div>

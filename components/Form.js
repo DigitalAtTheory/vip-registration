@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase/db";
+import { v4 as uuidv4 } from "uuid";
 import StepOne from "./StepOne";
 import StepThree from "./StepThree";
 import StepTwo from "./StepTwo";
@@ -44,6 +45,7 @@ export default function Form() {
         company: e.target[`${input.company}`].value,
         checkedIn: false,
         checkedInTime: null,
+        id: uuidv4(),
       };
       if (!guest.firstName || !guest.lastName || !guest.company) {
         setError(true);
