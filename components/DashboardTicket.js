@@ -1,8 +1,35 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from "react";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase/db";
 import Radios from "./Radios";
 
 export default function DashboardTicket({ ticket }) {
   const [seating, setSeating] = useState(ticket.seating);
+
+  useEffect(() => {
+    const docRef = doc(db, "tickets", ticket.ref);
+    console.log("Running update doc");
+    updateDoc(docRef, {
+      seating: seating,
+    });
+  }, [seating]);
+
+  const handleApproveDeny = async (approved) => {
+    const docRef = doc(db, "tickets", ticket.ref);
+    if (approved) {
+      await updateDoc(docRef, {
+        approved: true,
+        needsApproval: false,
+      });
+    } else if (!approved) {
+      await updateDoc(docRef, {
+        approved: false,
+        needsApproval: false,
+      });
+    }
+  };
+
   return (
     <div className="bg-white shadow-lg flex flex-col justify-between rounded text-gray-900">
       <div className="px-4 py-4">
@@ -62,15 +89,37 @@ export default function DashboardTicket({ ticket }) {
       {ticket.needsApproval && (
         <div className="-mt-px flex divide-x-2 divide-gray-400 border-t border-gray-400">
           <div className="w-0 flex-1 flex">
-            <button className="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-50 uppercase font-bold bg-emerald-400 hover:bg-emerald-200 border border-transparent rounded-bl hover:text-emerald-600">
+            <button
+              onClick={() => handleApproveDeny(true)}
+              className="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-50 uppercase font-bold bg-emerald-400 hover:bg-emerald-200 border border-transparent rounded-bl hover:text-emerald-600"
+            >
               Approve
             </button>
           </div>
           <div className="w-0 flex-1 flex">
-            <button className="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-white uppercase bg-red-400 font-bold border border-transparent rounded-br hover:bg-red-200 hover:text-red-600">
+            <button
+              onClick={() => handleApproveDeny(false)}
+              className="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-white uppercase bg-red-400 font-bold border border-transparent rounded-br hover:bg-red-200 hover:text-red-600"
+            >
               Deny
             </button>
           </div>
+        </div>
+      )}
+      {!ticket.needsApproval && ticket.approved && (
+        <div className="rounded-b bg-green-300 py-2 text-center">
+          <p className="font-bold uppercase text-sm text-green-700">Approved</p>
+          <p className="text-green-700 font-bold">
+            <span className="font-normal text-sm mr-1">Confirmation #:</span>{" "}
+            {ticket.confirmationNumber}
+          </p>
+        </div>
+      )}
+      {!ticket.needsApproval && !ticket.approved && (
+        <div className="rounded-b bg-red-300 py-2 text-center">
+          <p className="font-bold uppercase text-sm text-red-700">
+            Ticket Request Denied
+          </p>
         </div>
       )}
     </div>
