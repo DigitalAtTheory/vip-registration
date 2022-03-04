@@ -1,6 +1,12 @@
 import GuestInputs from "./GuestInputs";
 
-export default function StepTwo({ numberOfTickets, handleConfirm, setStep }) {
+export default function StepTwo({
+  numberOfTickets,
+  handleConfirm,
+  setStep,
+  error,
+  message,
+}) {
   return (
     <div className="mb-24">
       <h2 className="font-medium text-lg mb-8 md:mb-4">
@@ -30,6 +36,9 @@ export default function StepTwo({ numberOfTickets, handleConfirm, setStep }) {
           >
             Confirm
           </button>
+        </div>
+        <div className="mb-24 text-center">
+          {error && <p className="text-red-500">{message}</p>}
         </div>
       </form>
     </div>

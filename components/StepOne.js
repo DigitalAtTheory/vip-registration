@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Input from "./Input";
 import Select from "./Select";
 
@@ -9,6 +10,9 @@ export default function StepOne({
   numberOfTickets,
   setNumberOfTickets,
 }) {
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState("");
+
   const handleChange = (e) => {
     switch (e.target.name) {
       case "firstName":
@@ -37,6 +41,27 @@ export default function StepOne({
         break;
       default:
         break;
+    }
+  };
+
+  const handleNext = () => {
+    if (!basicInfo.firstName) {
+      setError(true);
+      setMessage("You must enter your first name.");
+    } else if (!basicInfo.lastName) {
+      setError(true);
+      setMessage("You must enter your last name.");
+    } else if (!basicInfo.email) {
+      setError(true);
+      setMessage("You must enter your email.");
+    } else if (!basicInfo.zipCode) {
+      setError(true);
+      setMessage("You must enter your zip code.");
+    } else {
+      if (error) {
+        setError(false);
+      }
+      setStep(2);
     }
   };
 
@@ -79,13 +104,16 @@ export default function StepOne({
         numberOfTickets={numberOfTickets}
         setNumberOfTickets={setNumberOfTickets}
       />
-      <div className="mt-12 mb-24">
+      <div className="my-12">
         <button
           className="font-medium bg-gold-500 hover:bg-gold-200 hover:text-gold-800 text-gray-900 block w-full md:w-1/2 mx-auto rounded py-2 px-4"
-          onClick={() => setStep(2)}
+          onClick={handleNext}
         >
           Next
         </button>
+      </div>
+      <div className="mb-24 text-center">
+        {error && <p className="text-red-500">{message}</p>}
       </div>
     </div>
   );

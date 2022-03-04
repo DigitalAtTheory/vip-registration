@@ -18,6 +18,10 @@ export default function Form() {
   });
   const [numberOfTickets, setNumberOfTickets] = useState(ticketOptions[0]);
   const [guests, setGuests] = useState([]);
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState(
+    "You must fill out each input for all ticket requests"
+  );
 
   const router = useRouter();
 
@@ -32,6 +36,7 @@ export default function Form() {
       };
       return input;
     });
+    let localError = false;
     const values = inputs.map((input) => {
       const guest = {
         firstName: e.target[`${input.firstName}`].value,
@@ -40,11 +45,19 @@ export default function Form() {
         checkedIn: false,
         checkedInTime: null,
       };
-      return guest;
+      if (!guest.firstName || !guest.lastName || !guest.company) {
+        setError(true);
+        localError = true;
+      } else {
+        setError(false);
+        localError = false;
+        return guest;
+      }
     });
-
-    setGuests(values);
-    setStep(3);
+    if (!localError) {
+      setGuests(values);
+      setStep(3);
+    }
   };
 
   const handleSubmit = async () => {
@@ -126,6 +139,8 @@ export default function Form() {
           numberOfTickets={numberOfTickets}
           handleConfirm={handleConfirm}
           setStep={setStep}
+          error={error}
+          message={message}
         />
       ) : step === 3 ? (
         <StepThree
