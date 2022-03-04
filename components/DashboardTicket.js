@@ -9,7 +9,6 @@ export default function DashboardTicket({ ticket }) {
 
   useEffect(() => {
     const docRef = doc(db, "tickets", ticket.ref);
-    console.log("Running update doc");
     updateDoc(docRef, {
       seating: seating,
     });
@@ -47,7 +46,7 @@ export default function DashboardTicket({ ticket }) {
             </span>
           </p>
         </div>
-        <div className="flex gap-8 items-center mb-2">
+        <div className="flex flex-col gap-2 md:flex-row md:gap-8 md:items-center mb-4 md:mb-2">
           <p className="font-bold uppercase text-sm">Seating:</p>
           <Radios seating={seating} setSeating={setSeating} />
         </div>
@@ -58,7 +57,7 @@ export default function DashboardTicket({ ticket }) {
           {ticket.guests.map((guest, i) => (
             <div
               key={`${guest.firstName}-${i}`}
-              className="grid grid-cols-2 items-center"
+              className="grid grid-cols-1 mb-3 md:mb-0 md:grid-cols-2 items-center"
             >
               <div className="flex items-center gap-2 mb-2">
                 <p className="border-2 border-gold-500 text-gold-500 font-bold px-2 rounded">
@@ -68,7 +67,7 @@ export default function DashboardTicket({ ticket }) {
                   <p className="">
                     {guest.firstName} {guest.lastName}
                   </p>
-                  <p className="text-xs uppercase text-gray-800 font-bold bg-gray-200 px-2 rounded-full">
+                  <p className="text-xs uppercase w-max text-gray-800 font-bold bg-gray-200 px-2 rounded-full">
                     {guest.company}
                   </p>
                 </div>

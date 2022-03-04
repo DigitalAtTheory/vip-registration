@@ -59,21 +59,45 @@ export default function DashboardPage({
     const colRef = collection(db, "tickets");
     const unsubscribe = onSnapshot(colRef, (querySnapshot) => {
       let updatedTickets = [];
+      let updatedTicketTotal = [];
+      let updatedApprovedTickets = [];
+      let updatedDeniedTickets = [];
       querySnapshot.forEach((doc) => {
         let ticket = { ...doc.data(), ref: doc.id };
         updatedTickets = [ticket, ...updatedTickets];
+        updatedTicketTotal = [...ticket.guests, ...updatedTicketTotal];
+        if (ticket.approved) {
+          updatedApprovedTickets = [
+            ticket.numberOfTickets,
+            ...updatedApprovedTickets,
+          ];
+        } else if (ticket.approved === null) {
+          return;
+        } else if (!ticket.approved) {
+          updatedDeniedTickets = [
+            ticket.numberOfTickets,
+            ...updatedDeniedTickets,
+          ];
+        }
       });
-      setTickets(updatedTickets);
-    });
 
+      setTickets(updatedTickets);
+      setTotalTickets(updatedTicketTotal);
+      setTotalApprovedTickets(
+        updatedApprovedTickets.reduce((partialSum, a) => partialSum + a, 0)
+      );
+      setTotalDeniedTickets(
+        updatedDeniedTickets.reduce((partialSum, a) => partialSum + a, 0)
+      );
+    });
     return () => unsubscribe();
   }, []);
 
   return (
     <div className="mb-24">
       <Header badges={false} />
-      <div className="mt-24 mx-auto max-w-4xl">
-        <div className="bg-white py-4 px-4 shadow-xl rounded text-gray-800 flex items-center gap-8 w-max mx-auto mb-6">
+      <div className="mt-24 mx-auto max-w-4xl px-4 md:px-0">
+        <div className="bg-white py-4 px-4 shadow-xl rounded text-gray-800 flex items-center gap-8 md:w-max mx-auto mb-6">
           <p className="uppercase text-lg">
             Total Number of Tickets Requested:
           </p>
@@ -93,7 +117,7 @@ export default function DashboardPage({
             {totalDeniedTickets}
           </p>
         </div>
-        <div className="flex flex-wrap gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {tickets.map((ticket) => (
             <DashboardTicket key={ticket.confirmationNumber} ticket={ticket} />
           ))}
