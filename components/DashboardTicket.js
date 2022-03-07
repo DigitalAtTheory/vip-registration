@@ -57,9 +57,9 @@ export default function DashboardTicket({ ticket }) {
           {ticket.guests.map((guest, i) => (
             <div
               key={`${guest.firstName}-${i}`}
-              className="grid grid-cols-1 mb-3 md:mb-0 md:grid-cols-2 items-center"
+              className="grid grid-cols-1 mb-3 md:mb-0 md:grid-cols-3 md:gap-x-2 items-center"
             >
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-2 col-span-2">
                 <p className="border-2 border-gold-500 text-gold-500 font-bold px-2 rounded">
                   {i + 1}
                 </p>
@@ -67,7 +67,7 @@ export default function DashboardTicket({ ticket }) {
                   <p className="">
                     {guest.firstName} {guest.lastName}
                   </p>
-                  <p className="text-xs uppercase w-max text-gray-800 font-bold bg-gray-200 px-2 rounded-full">
+                  <p className="text-xs uppercase text-ellipsis whitespace-nowrap max-w-max w-52 overflow-hidden text-gray-800 font-bold bg-gray-200 px-2 rounded-full">
                     {guest.company}
                   </p>
                 </div>
