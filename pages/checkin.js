@@ -11,6 +11,8 @@ export async function getStaticProps() {
   const snapshot = await getDocs(colRef);
   const data = snapshot.docs.map((doc) => ({ ...doc.data(), ref: doc.id }));
   let initialTickets = [];
+  let initialNoTickets;
+
   data.forEach((ticket) => {
     let generalTicketInfo = {
       ref: ticket.ref,
@@ -25,22 +27,31 @@ export async function getStaticProps() {
         };
         return newTicket;
       });
+      initialNoTickets = false;
       initialTickets = [...initialTickets, ...newTicketArray];
     } else {
-      return;
+      initialNoTickets = true;
     }
   });
 
   return {
     props: {
       initialTickets,
+      initialNoTickets,
     },
   };
 }
 
-export default function CheckinPage({ initialTickets }) {
+export default function CheckinPage({ initialTickets, initialNoTickets }) {
   const [tickets, setTickets] = useState(initialTickets);
   const [searchQuery, setSearchQuery] = useState("");
+  const [noTickets, setNoTickets] = useState(initialNoTickets);
+
+  useEffect(() => {
+    if (tickets.length > 0) {
+      setNoTickets(false);
+    }
+  }, [tickets]);
 
   useEffect(() => {
     setTickets(
@@ -64,11 +75,17 @@ export default function CheckinPage({ initialTickets }) {
         <div className="mb-24">
           <Search searchQuery={searchQuery} handleSearch={handleSearch} />
         </div>
-        <div>
-          {tickets.map((ticket, i) => (
-            <Ticket key={ticket.id} ticket={ticket} index={i} />
-          ))}
-        </div>
+        {noTickets ? (
+          <p className="text-center text-3xl">
+            No tickets have been approved at this time
+          </p>
+        ) : (
+          <div>
+            {tickets.map((ticket, i) => (
+              <Ticket key={ticket.id} ticket={ticket} index={i} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
