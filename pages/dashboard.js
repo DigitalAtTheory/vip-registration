@@ -81,6 +81,14 @@ export default function DashboardPage({
         }
       });
 
+      updatedTickets.sort((a, b) => {
+        if (a.needsApproval) {
+          return -1;
+        }
+        if (b.approved) {
+          return 1;
+        }
+      });
       setTickets(updatedTickets);
       setTotalTickets(updatedTicketTotal);
       setTotalApprovedTickets(
