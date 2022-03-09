@@ -17,6 +17,7 @@ export async function getStaticProps() {
     let generalTicketInfo = {
       ref: ticket.ref,
       confirmationNumber: ticket.confirmationNumber,
+      seating: ticket.seating,
     };
     if (ticket.approved) {
       const newTicketArray = ticket.guests.map((guest, i) => {
@@ -33,6 +34,8 @@ export async function getStaticProps() {
       initialNoTickets = true;
     }
   });
+
+  console.log(initialTickets);
 
   return {
     props: {

@@ -14,6 +14,7 @@ export default function Ticket({ ticket, index }) {
       let newTicket = {
         ref: ticket.ref,
         confirmationNumber: ticket.confirmationNumber,
+        seating: ticket.seating,
       };
       const addedIndex = data.guests.map((guest, i) => {
         return {
@@ -71,13 +72,18 @@ export default function Ticket({ ticket, index }) {
   return (
     <div className="bg-white pt-2 my-4 rounded shadow">
       <div className="px-2 mb-4 flex justify-between items-center">
-        <div>
-          <h2 className="font-bold text-gray-800 mb-1">
-            {localTicket.firstName} {localTicket.lastName}
-          </h2>
-          <p className="w-max uppercase text-xs font-bold text-gray-700 bg-gray-200 px-2 rounded-full">
-            {localTicket.company}
-          </p>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <h2 className="font-bold text-gray-800 mb-1">
+              {localTicket.firstName} {localTicket.lastName}
+            </h2>
+            <p className="w-max uppercase text-xs font-bold text-gray-700 bg-gray-200 px-2 rounded-full">
+              {localTicket.company}
+            </p>
+          </div>
+          <div className="bg-slate-200 text-slate-700 text-center font-medium py-1 px-3 rounded flex items-center justify-center max-w-max">
+            {localTicket.seating}
+          </div>
         </div>
         <div>
           {localTicket.checkedIn ? (

@@ -54,6 +54,7 @@ export default function DashboardPage({
   const [totalDeniedTickets, setTotalDeniedTickets] = useState(
     initialTotalDeniedTickets
   );
+  const [tracksideGuests, terraceGuests] = useState();
 
   useEffect(() => {
     const colRef = collection(db, "tickets");
@@ -105,25 +106,27 @@ export default function DashboardPage({
     <div className="mb-24">
       <Header badges={false} />
       <div className="mt-24 mx-auto max-w-4xl px-4 md:px-0">
-        <div className="bg-white py-4 px-4 shadow-xl rounded text-gray-800 flex items-center gap-8 md:w-max mx-auto mb-6">
-          <p className="uppercase text-lg">
-            Total Number of Tickets Requested:
-          </p>
-          <p className="text-xl font-bold bg-gold-500 text-gold-800 px-4 py-2 rounded">
-            {totalTickets.length}
-          </p>
-        </div>
-        <div className="bg-white py-4 px-4 shadow-xl rounded text-gray-800 flex items-center gap-8 w-max mx-auto mb-6">
-          <p className="uppercase text-lg">Total Approved Tickets:</p>
-          <p className="text-xl font-bold bg-green-400 text-green-800 px-4 py-2 rounded">
-            {totalApprovedTickets}
-          </p>
-        </div>
-        <div className="bg-white py-4 px-4 shadow-xl rounded text-gray-800 flex items-center gap-8 w-max mx-auto mb-24">
-          <p className="uppercase text-lg">Total Denied Tickets:</p>
-          <p className="text-xl font-bold bg-red-400 text-red-900 px-4 py-2 rounded">
-            {totalDeniedTickets}
-          </p>
+        <div>
+          <div className="bg-white py-4 px-4 shadow-xl rounded text-gray-800 flex items-center gap-8 md:w-max mx-auto mb-6">
+            <p className="uppercase text-lg">
+              Total Number of Tickets Requested:
+            </p>
+            <p className="text-xl font-bold bg-gold-500 text-gold-800 px-4 py-2 rounded">
+              {totalTickets.length}
+            </p>
+          </div>
+          <div className="bg-white py-4 px-4 shadow-xl rounded text-gray-800 flex items-center gap-8 w-max mx-auto mb-6">
+            <p className="uppercase text-lg">Total Approved Tickets:</p>
+            <p className="text-xl font-bold bg-green-400 text-green-800 px-4 py-2 rounded">
+              {totalApprovedTickets}
+            </p>
+          </div>
+          <div className="bg-white py-4 px-4 shadow-xl rounded text-gray-800 flex items-center gap-8 w-max mx-auto mb-24">
+            <p className="uppercase text-lg">Total Denied Tickets:</p>
+            <p className="text-xl font-bold bg-red-400 text-red-900 px-4 py-2 rounded">
+              {totalDeniedTickets}
+            </p>
+          </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {tickets.map((ticket) => (
