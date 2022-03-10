@@ -1,7 +1,17 @@
-export default function GuestStatCard({ title, guests, checkedin, remaining }) {
+export default function GuestStatCard({
+  title,
+  guests,
+  checkedin,
+  remaining,
+  trackside,
+}) {
   return (
-    <div className="bg-gray-50 text-gray-800 rounded overflow-hidden">
-      <h2 className="bg-gold-200 text-gold-700 text-center text-2xl py-2">
+    <div className="bg-gray-50 text-gray-900 rounded overflow-hidden">
+      <h2
+        className={`${
+          trackside ? "bg-gold-200 text-gold-700" : "bg-gray-800 text-gray-200"
+        } text-center text-2xl py-2`}
+      >
         {title}
       </h2>
       <div className="flex flex-col divide-y divide-gray-300 px-6">
