@@ -208,7 +208,7 @@ export default function DashboardPage({
     <div className="mb-24">
       <Header badges={false} />
       <div className="mt-24 mx-auto max-w-4xl px-4 md:px-0">
-        <div className="flex flex-wrap items-center justify-around mb-12">
+        <div className="flex flex-wrap items-center gap-4 md:gap-0 justify-around mb-12">
           <GuestStatCard
             title="Trackside VIP Guests"
             guests={tracksideGuests}
