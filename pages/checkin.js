@@ -34,9 +34,6 @@ export async function getStaticProps() {
       initialNoTickets = true;
     }
   });
-
-  console.log(initialTickets);
-
   return {
     props: {
       initialTickets,
