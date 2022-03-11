@@ -72,12 +72,12 @@ export default function Ticket({ ticket, index }) {
   return (
     <div className="bg-white pt-2 my-4 rounded shadow">
       <div className="px-2 mb-4 flex justify-between items-center">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <h2 className="font-bold text-gray-800 mb-1">
               {localTicket.firstName} {localTicket.lastName}
             </h2>
-            <p className="w-max uppercase text-xs font-bold text-gray-700 bg-gray-200 px-2 rounded-full">
+            <p className="max-w-max w-52 text-ellipsis overflow-hidden whitespace-nowrap uppercase text-xs font-bold text-gray-700 bg-gray-200 px-2 rounded-full">
               {localTicket.company}
             </p>
           </div>

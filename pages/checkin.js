@@ -71,7 +71,7 @@ export default function CheckinPage({ initialTickets, initialNoTickets }) {
   return (
     <div>
       <Header badges={false} />
-      <div className="max-w-4xl mx-auto mt-24">
+      <div className="max-w-4xl px-4 md:px-2 mx-auto mt-24">
         <div className="mb-24">
           <Search searchQuery={searchQuery} handleSearch={handleSearch} />
         </div>
