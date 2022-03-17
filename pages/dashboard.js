@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "../components/Header";
-import {
-  collection,
-  connectFirestoreEmulator,
-  getDocs,
-  onSnapshot,
-} from "firebase/firestore";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/db";
 import DashboardTicket from "../components/DashboardTicket";
 import GuestStatCard from "../components/GuestStatCard";

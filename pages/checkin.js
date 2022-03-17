@@ -25,6 +25,7 @@ export async function getStaticProps() {
           ...guest,
           ...generalTicketInfo,
           index: i,
+          fullName: `${guest.firstName} ${guest.lastName}`,
         };
         return newTicket;
       });
@@ -54,11 +55,20 @@ export default function CheckinPage({ initialTickets, initialNoTickets }) {
   }, [tickets]);
 
   useEffect(() => {
-    setTickets(
-      tickets.filter((ticket) =>
-        ticket.confirmationNumber.includes(searchQuery.toUpperCase())
-      )
-    );
+    // setTickets(
+    //   tickets.filter((ticket) =>
+    //     ticket.confirmationNumber.includes(searchQuery.toUpperCase())
+    //   )
+    // );
+
+    let filteredTickets = tickets.filter((ticket) => {
+      return (
+        ticket.confirmationNumber.includes(searchQuery.toUpperCase()) ||
+        ticket.fullName.toUpperCase().includes(searchQuery.toUpperCase())
+      );
+    });
+    setTickets(filteredTickets);
+
     if (!searchQuery) {
       setTickets(initialTickets);
     }
