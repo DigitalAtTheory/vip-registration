@@ -5,24 +5,21 @@ import { db } from "../firebase/db";
 import Radios from "./Radios";
 
 export default function DashboardTicket({ ticket }) {
-  const [localTicket, setLocalTicket] = useState(ticket);
-  const [seating, setSeating] = useState(localTicket.seating);
+  const [seating, setSeating] = useState(ticket.seating);
 
   useEffect(async () => {
+    if (ticket.confirmationNumber === "AV340885") {
+      setSeating("Terrace VIP");
+    }
     const docRef = doc(db, "tickets", ticket.ref);
-    const unsub = onSnapshot(docRef, (querySnapshot) => {
-      const data = querySnapshot.data();
-      setLocalTicket(data);
-    });
 
-    return () => unsub();
-  }, []);
-
-  useEffect(() => {
-    const docRef = doc(db, "tickets", ticket.ref);
-    updateDoc(docRef, {
-      seating: seating,
-    });
+    try {
+      await updateDoc(docRef, {
+        seating: seating,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }, [seating]);
 
   const handleApproveDeny = async (approved) => {
@@ -45,15 +42,15 @@ export default function DashboardTicket({ ticket }) {
       <div className="px-4 py-4">
         <div className="text-center mb-6">
           <p className="font-bold">
-            {localTicket.basicInfo.firstName} {localTicket.basicInfo.lastName}
+            {ticket.basicInfo.firstName} {ticket.basicInfo.lastName}
           </p>
-          <p className="font-medium mt-1">{localTicket.basicInfo.email}</p>
+          <p className="font-medium mt-1">{ticket.basicInfo.email}</p>
         </div>
         <div className="mb-4">
           <p className="font-bold uppercase text-sm flex items-center gap-2">
             Number of Tickets:{" "}
             <span className="bg-gold-500 text-gold-700 text-lg py-1 px-3 rounded">
-              {localTicket.numberOfTickets}
+              {ticket.numberOfTickets}
             </span>
           </p>
         </div>
@@ -65,7 +62,7 @@ export default function DashboardTicket({ ticket }) {
           <p className="font-bold uppercase text-sm">Tickets:</p>
         </div>
         <div>
-          {localTicket.guests.map((guest, i) => (
+          {ticket.guests.map((guest, i) => (
             <div
               key={`${guest.firstName}-${i}`}
               className="grid grid-cols-1 mb-3 md:mb-0 md:grid-cols-3 md:gap-x-2 items-center"
@@ -98,7 +95,7 @@ export default function DashboardTicket({ ticket }) {
           ))}
         </div>
       </div>
-      {localTicket.needsApproval && (
+      {ticket.needsApproval && (
         <div className="-mt-px flex divide-x-2 divide-gray-400 border-t border-gray-400">
           <div className="w-0 flex-1 flex">
             <button
@@ -118,16 +115,16 @@ export default function DashboardTicket({ ticket }) {
           </div>
         </div>
       )}
-      {!localTicket.needsApproval && localTicket.approved && (
+      {!ticket.needsApproval && ticket.approved && (
         <div className="rounded-b bg-green-300 py-2 text-center">
           <p className="font-bold uppercase text-sm text-green-700">Approved</p>
           <p className="text-green-700 font-bold">
             <span className="font-normal text-sm mr-1">Confirmation #:</span>{" "}
-            {localTicket.confirmationNumber}
+            {ticket.confirmationNumber}
           </p>
         </div>
       )}
-      {!localTicket.needsApproval && !localTicket.approved && (
+      {!ticket.needsApproval && !ticket.approved && (
         <div className="rounded-b bg-red-300 py-2 text-center">
           <p className="font-bold uppercase text-sm text-red-700">
             Ticket Request Denied
