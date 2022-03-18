@@ -8,9 +8,22 @@ export default function DashboardTicket({ ticket }) {
   const [seating, setSeating] = useState(ticket.seating);
 
   useEffect(async () => {
-    if (ticket.confirmationNumber === "AV340885" && !ticket.seating) {
-      setSeating("Terrace VIP");
+    if (!ticket.seating) {
+      switch (ticket.confirmationNumber) {
+        case "AV340885":
+          setSeating("Terrace VIP");
+          break;
+        case "KP309612":
+          setSeating("Trackside VIP");
+          break;
+        case "RA979966":
+          setSeating("Trackside VIP");
+          break;
+        default:
+          break;
+      }
     }
+
     const docRef = doc(db, "tickets", ticket.ref);
 
     try {
