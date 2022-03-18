@@ -8,7 +8,7 @@ export default function DashboardTicket({ ticket }) {
   const [seating, setSeating] = useState(ticket.seating);
 
   useEffect(async () => {
-    if (ticket.confirmationNumber === "AV340885") {
+    if (ticket.confirmationNumber === "AV340885" && !ticket.seating) {
       setSeating("Terrace VIP");
     }
     const docRef = doc(db, "tickets", ticket.ref);
