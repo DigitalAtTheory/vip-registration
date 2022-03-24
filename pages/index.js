@@ -10,7 +10,7 @@ export default function Home() {
         <h1 className="text-2xl md:text-4xl font-medium text-center my-10">
           Sebring VIP Hospitality Registration
         </h1>
-        <ClosedForm />
+        <Form />
       </div>
     </>
   );
