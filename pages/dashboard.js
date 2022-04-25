@@ -5,7 +5,7 @@ import { db } from "../firebase/db";
 import DashboardTicket from "../components/DashboardTicket";
 import GuestStatCard from "../components/GuestStatCard";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const colRef = collection(db, "tickets");
   const snapshot = await getDocs(colRef);
   const data = snapshot.docs.map((doc) => ({ ...doc.data(), ref: doc.id }));
