@@ -24,16 +24,16 @@ export default function DashboardTicket({ ticket }) {
   //     }
   //   }
 
-    const docRef = doc(db, "tickets", ticket.ref);
+  //   const docRef = doc(db, "tickets", ticket.ref);
 
-    try {
-      await updateDoc(docRef, {
-        seating: seating,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }, [seating]);
+  //   try {
+  //     await updateDoc(docRef, {
+  //       seating: seating,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [seating]);
 
   const handleApproveDeny = async (approved) => {
     const docRef = doc(db, "tickets", ticket.ref);
