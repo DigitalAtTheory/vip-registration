@@ -57,6 +57,10 @@ export default function DashboardTicket({ ticket }) {
     }
   };
 
+  const handleChooseSeating = (e) => {
+    setSeating(e.target.value)
+  }
+
   return (
     <div className="bg-white shadow-lg flex flex-col justify-between rounded text-gray-900">
       <div className="px-4 py-4">
@@ -76,7 +80,16 @@ export default function DashboardTicket({ ticket }) {
         </div>
         <div className="flex flex-col gap-2 md:flex-row md:gap-8 md:items-center mb-4 md:mb-2">
           <p className="font-bold uppercase text-sm">Seating:</p>
-          <Radios seating={seating} setSeating={setSeating} />
+          <div>
+            <div>
+              <input type="radio" value="Trackside VIP" checked={seating === "Trackside VIP"} onChange={handleChooseSeating}/>
+              <label>Trackside VIP</label>
+            </div>
+            <div>
+              <input type="radio" value="Terrace VIP" checked={seating === "Terrace VIP"} onChange={handleChooseSeating}/>
+              <label>Terrace VIP</label>
+            </div>
+          </div>
         </div>
         <div className="flex items-center gap-8 mb-1">
           <p className="font-bold uppercase text-sm">Tickets:</p>
