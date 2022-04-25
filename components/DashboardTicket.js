@@ -7,6 +7,11 @@ import Radios from "./Radios";
 export default function DashboardTicket({ ticket }) {
   const [seating, setSeating] = useState(ticket.seating);
 
+
+  useEffect(() => {
+    console.log(ticket.seating);
+  }, [ticket.seating])
+
   useEffect(async () => {
     // if (!ticket.seating) {
     //   switch (ticket.confirmationNumber) {
