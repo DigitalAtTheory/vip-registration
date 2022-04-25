@@ -9,7 +9,9 @@ export default function DashboardTicket({ ticket }) {
 
 
   useEffect(() => {
-    console.log(ticket.seating);
+    if (ticket.confirmationNumber === "KZ921472") {
+      console.log(ticket.seating);
+    }
   }, [ticket.seating])
 
   useEffect(async () => {
